@@ -11,64 +11,6 @@
 ## Criterios de aceptación
 
 
-
----
-
-# Especificación de Generación de Código Intermedio: Tercetos
-
-## 1. Estructura de Datos en C
-
-La representación intermedia del compilador de **Razio** se basa en la generación de **tercetos**. Cada terceto abstrae una operación elemental del programa mediante una estructura compuesta por tres campos: **operación**, **operando 1** y **operando 2**.
-
-Para gestionar esta representación en memoria durante el análisis, se define una estructura global en C dentro de `sintactico.y`:
-
-```c
-typedef struct {
-    char operacion[15]; // Tipo de instrucción (ej. "+", "=", "BF", "CMP")
-    char operando1[50]; // Variable, literal o referencia a terceto previo (ej. "[T0]")
-    char operando2[50]; // Variable, literal, referencia previo o "_" si es unario
-} Terceto;
-
-/* Arreglo global para almacenar los tercetos y contador de índice */
-Terceto tabla_tercetos[1000];
-int indice_terceto = 0;
-
-```
-
-### Mecánica de Referenciación
-
-Los resultados de operaciones complejas no generan variables temporales explícitas en el código fuente. En su lugar, se utiliza el índice asignado en la tabla de tercetos formateado como **`[T_]`**. Este valor actúa como identificador de operando en tercetos posteriores.
-
----
-
-## 2. Conjunto de Operadores Soportados
-
-La tabla de tercetos soporta un conjunto cerrado de instrucciones intermedias que simplifican el código fuente para su posterior traducción a lenguaje ensamblador:
-
-* **Operadores Aritméticos:** `+`, `-`, `*`, `/`
-* Realizan operaciones elementales binarias entre dos operandos.
-
-
-* **Operadores de Asignación:** `=`
-* Asignan el valor del operando 2 (variable, literal o terceto) al operando 1 (variable).
-
-
-* **Operadores de Comparación:** `>`, `<`, `>=`, `<=`, `==`, `!=`
-* Comparan dos expresiones para preparar una evaluación lógica.
-
-
-* **Control de Flujo (Saltos):**
-* `BF` (*Branch on False*): Salto por Falso. Si el resultado de la condición (operando 1) es falso, interrumpe la ejecución lineal y salta a la posición especificada (operando 2).
-* `BI` (*Branch Inconditional*): Salto Incondicional. Fuerza el salto a una posición específica de la tabla de tercetos (operando 1) sin evaluar condición.
-
-
-* **Entrada y Salida (E/S):** `MOSTRAR`, `LEER`
-* Gestionan la impresión o lectura de datos en pantalla/teclado.
-
-
-
----
-
 ## 3. Generación de Tercetos en Bison
 
 La emisión de tercetos se realiza mediante **Traducción Dirigida por la Sintaxis (SDT)** dentro de las **acciones semánticas** `{ ... }` de `sintactico.y`.
