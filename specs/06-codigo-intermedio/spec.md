@@ -20,7 +20,7 @@
 
 La representación intermedia del compilador de **Razio** se basa en la generación de **tercetos**. Cada terceto abstrae una operación elemental del programa mediante una estructura compuesta por tres campos: **operación**, **operando 1** y **operando 2**.
 
-Para gestionar esta representación en memoria durante el análisis, se define una estructura global en C dentro de `sintactico.y` (o en su cabecera `tercetos.h`):
+Para gestionar esta representación en memoria durante el análisis, se define una estructura global en C dentro de `sintactico.y`:
 
 ```c
 typedef struct {
