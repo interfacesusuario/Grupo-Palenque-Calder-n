@@ -12,10 +12,6 @@
 
 
 
-
-
-Acá tenés un modelo de **Especificación de Generación de Código Intermedio (Tercetos)** redactado en un lenguaje claro, profesional y estructurado, listo para incluir en la documentación de tu compilador de **Razio** o presentar a la cátedra.
-
 ---
 
 # Especificación de Generación de Código Intermedio: Tercetos
