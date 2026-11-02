@@ -9,7 +9,7 @@
  ********************************************************************************/
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
+ #include <string.h>
 #include <ctype.h>
 
 /*28/10*/
@@ -73,7 +73,7 @@
  * racionales y literales de cadena reconocidos por el analizador.
  * Incluye la función insertar_ts() para evitar duplicados y registrar atributos.
  ********************************************************************************/
-typedef struct {
+typedef struct  {
     char nombre[MAX_BUFFER];
     char tipo[20];
     char valor[MAX_BUFFER];
