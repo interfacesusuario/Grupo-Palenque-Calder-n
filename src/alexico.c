@@ -7,9 +7,10 @@
  * - Longitud máxima de identificadores (D6: 20 caracteres).
  * - Límite superior para enteros con signo de 32 bits (D2).
  ********************************************************************************/
-#include <stdio.h>
+#include <stdio.h> 
 #include <stdlib.h>
 #include <string.h>
+
 #include <ctype.h>
 
 /*28/10*/
@@ -78,6 +79,7 @@ typedef struct {
     char tipo[20];
     char valor[MAX_BUFFER];
     int longitud;
+
 } RegTablaSimbolos;
 
 RegTablaSimbolos tabla_simbolos[500];
@@ -139,7 +141,8 @@ typedef void (*AccionSemantica)(void);
 /* 3. Traductor de caracteres a columna:
  * Recibe el carácter leído del archivo (c) y devuelve su número de columna correspondiente
  * para consultar M1 y M2. Todo carácter fuera del alfabeto cae en COL_OTRO (19). */
-Evento get_evento(int c) {
+Evento get_evento(int c)
+{
     if (isalpha(c)) return COL_LETRA;
     if (isdigit(c)) return COL_DIGITO;
     switch (c) {
@@ -352,7 +355,8 @@ void f8(void) {
 }
 
 /* fa: Acumula el segundo carácter en operadores compuestos (==, !=, <=, >=) */
-void fa(void) { 
+void fa(void) 
+{ 
     if (buf_idx < MAX_BUFFER - 1) { 
         buffer[buf_idx++] = c_actual; 
         buffer[buf_idx] = '\0'; 
